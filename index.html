@@ -6,123 +6,123 @@
     <title>Skill-Shop | Dashboard Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-      :root {
-    --primary: #00d2ff; /* Bleu Néon */
-    --primary-glow: rgba(0, 210, 255, 0.3);
-    --bg-dark: #0a0b10; /* Fond très sombre */
-    --card-bg: rgba(20, 22, 30, 0.8);
-    --text-white: #ffffff;
-    --text-gray: #94a3b8;
-    --border: rgba(255, 255, 255, 0.08);
-    --success: #10b981;
-    --danger: #f43f5e;
-}
+        :root {
+            --primary: #00d2ff;
+            --primary-glow: rgba(0, 210, 255, 0.3);
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(20, 22, 30, 0.8);
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --success: #10b981;
+            --danger: #f43f5e;
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
 
-body { 
-    background-color: var(--bg-dark); 
-    color: var(--text-white); 
-    padding-top: 90px;
-    background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, var(--bg-dark) 80%);
-}
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-white); 
+            padding-top: 90px;
+            background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, var(--bg-dark) 80%);
+        }
 
-/* HEADER FUTURISTE */
-.main-header { 
-    position: fixed; top: 0; width: 100%; height: 70px; 
-    background: rgba(10, 11, 16, 0.8); backdrop-filter: blur(20px);
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 0 40px; z-index: 1000; border-bottom: 1px solid var(--border);
-}
+        /* HEADER FUTURISTE */
+        .main-header { 
+            position: fixed; top: 0; width: 100%; height: 70px; 
+            background: rgba(10, 11, 16, 0.8); backdrop-filter: blur(20px);
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 40px; z-index: 1000; border-bottom: 1px solid var(--border);
+        }
 
-.logo { 
-    font-weight: 800; font-size: 1.4rem; letter-spacing: 2px; 
-    text-transform: uppercase; color: var(--primary);
-    text-shadow: 0 0 10px var(--primary-glow);
-}
+        .logo { 
+            font-weight: 800; font-size: 1.4rem; letter-spacing: 2px; 
+            text-transform: uppercase; color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
 
-.nav-instruction-btn {
-    background: transparent; border: 1px solid var(--primary);
-    color: var(--primary); padding: 8px 20px; border-radius: 4px;
-    cursor: pointer; font-weight: 600; font-size: 0.8rem;
-    text-transform: uppercase; letter-spacing: 1px;
-}
+        .nav-instruction-btn {
+            background: transparent; border: 1px solid var(--primary);
+            color: var(--primary); padding: 8px 20px; border-radius: 4px;
+            cursor: pointer; font-weight: 600; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
 
-.nav-instruction-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 15px var(--primary-glow); }
+        .nav-instruction-btn:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 15px var(--primary-glow); }
 
-.icon-btn { 
-    background: transparent; border: 1px solid var(--border); color: white; 
-    width: 42px; height: 42px; border-radius: 4px; cursor: pointer; position: relative;
-}
+        .icon-btn { 
+            background: transparent; border: 1px solid var(--border); color: white; 
+            width: 42px; height: 42px; border-radius: 4px; cursor: pointer; position: relative;
+        }
 
-.icon-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .icon-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-.badge { 
-    position: absolute; top: -5px; right: -5px; background: var(--primary); 
-    color: var(--bg-dark); font-size: 0.7rem; font-weight: 900; 
-    width: 18px; height: 18px; border-radius: 2px; 
-    display: flex; align-items: center; justify-content: center;
-}
+        .badge { 
+            position: absolute; top: -5px; right: -5px; background: var(--primary); 
+            color: var(--bg-dark); font-size: 0.7rem; font-weight: 900; 
+            width: 18px; height: 18px; border-radius: 2px; 
+            display: flex; align-items: center; justify-content: center;
+        }
 
-/* CATALOGUE & CARDS */
-.main-content { display: flex; max-width: 1400px; margin: 0 auto; padding: 20px; gap: 30px; }
-.skills-catalog { flex: 3; }
-.sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
+        /* CATALOGUE & CARDS */
+        .main-content { display: flex; max-width: 1400px; margin: 0 auto; padding: 20px; gap: 30px; }
+        .skills-catalog { flex: 3; }
+        .sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
 
-.main-border { 
-    background: var(--card-bg); border-radius: 12px; padding: 25px; 
-    border: 1px solid var(--border);
-}
+        .main-border { 
+            background: var(--card-bg); border-radius: 12px; padding: 25px; 
+            border: 1px solid var(--border);
+        }
 
-.skill-card { 
-    background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); 
-    padding: 20px; border-radius: 8px; display: flex; flex-direction: column; gap: 15px;
-}
+        .skill-card { 
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); 
+            padding: 20px; border-radius: 8px; display: flex; flex-direction: column; gap: 15px;
+        }
 
-.skill-card:hover { 
-    background: rgba(255, 255, 255, 0.05); 
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
+        .skill-card:hover { 
+            background: rgba(255, 255, 255, 0.05); 
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
 
-.skill-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+        .skill-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
 
-/* SIDE DRAWERS */
-.side-drawer { 
-    position: fixed; top: 0; right: 0; height: 100vh; width: 400px; 
-    background: #0f1117; transform: translateX(100%); 
-    transition: 0.4s ease-out; z-index: 2000; 
-    border-left: 1px solid var(--border); display: flex; flex-direction: column; 
-}
-.side-drawer.visible { transform: translateX(0); }
+        /* SIDE DRAWERS */
+        .side-drawer { 
+            position: fixed; top: 0; right: 0; height: 100vh; width: 400px; 
+            background: #0f1117; transform: translateX(100%); 
+            transition: 0.4s ease-out; z-index: 2000; 
+            border-left: 1px solid var(--border); display: flex; flex-direction: column; 
+        }
+        .side-drawer.visible { transform: translateX(0); }
 
-.drawer-header { padding: 30px; border-bottom: 1px solid var(--border); }
+        .drawer-header { padding: 30px; border-bottom: 1px solid var(--border); }
 
-/* PROGRESSION & BOUTONS */
-.balance-gold { font-size: 3rem; font-weight: 800; color: #fff; }
+        /* PROGRESSION & BOUTONS */
+        .balance-gold { font-size: 3rem; font-weight: 800; color: #fff; }
 
-.progress-bar { background: rgba(255,255,255,0.05); height: 4px; border-radius: 2px; margin: 15px 0; }
-.progress-fill { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+        .progress-bar { background: rgba(255,255,255,0.05); height: 4px; border-radius: 2px; margin: 15px 0; }
+        .progress-fill { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
 
-.checkout-btn { 
-    width: 100%; padding: 15px; background: var(--primary); 
-    color: var(--bg-dark); border: none; border-radius: 4px; 
-    font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-}
+        .checkout-btn { 
+            width: 100%; padding: 15px; background: var(--primary); 
+            color: var(--bg-dark); border: none; border-radius: 4px; 
+            font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+        }
 
-.item-card { 
-    background: rgba(255,255,255,0.02); padding: 15px; border-radius: 4px; 
-    margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
-    border: 1px solid var(--border);
-}
+        .item-card { 
+            background: rgba(255,255,255,0.02); padding: 15px; border-radius: 4px; 
+            margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--border);
+        }
 
-/* ANIMATION TRAVAIL */
-#worker-zone { margin-top: 20px; border: 1px dashed var(--primary); padding: 20px; border-radius: 8px; }
-.worker-man { font-size: 40px; filter: drop-shadow(0 0 5px var(--primary)); }
+        /* ANIMATION TRAVAIL */
+        #worker-zone { margin-top: 20px; border: 1px dashed var(--primary); padding: 20px; border-radius: 8px; }
+        .worker-man { font-size: 40px; filter: drop-shadow(0 0 5px var(--primary)); }
 
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }}
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -141,35 +141,27 @@ body {
 
     <main class="main-content">
         <section class="skills-catalog">
-            <div class="portfolio-banner">
-                <div style="font-size: 2.5rem;">🚀</div>
-                <div>
-                    <h3 style="margin:0">Portfolio Link</h3>
-                    <a href="https://fd-top.github.io/Skillshop/" target="_blank" style="color:var(--primary); font-weight:700;">fd-top.github.io/Skillshop/</a>
-                </div>
-            </div>
-
             <div class="main-border">
-                <h2 style="margin:0">Catalogue (Drag & Drop vers 🛒)</h2>
+                <h2 style="margin-bottom: 20px;">Catalogue (Drag & Drop vers 🛒)</h2>
                 <div id="skills-list" class="skills-grid"></div>
             </div>
         </section>
         
         <aside class="sidebar-right">
             <div class="main-border">
-                <small>CRÉDITS DISPONIBLES</small>
-                <div class="balance-gold"><span id="credit-balance">1000</span> <small>C</small></div>
+                <small style="color: var(--text-gray);">CRÉDITS DISPONIBLES</small>
+                <div class="balance-gold"><span id="credit-balance">1000</span> <small style="font-size: 1rem;">C</small></div>
             </div>
             
             <div class="main-border">
-                <h3>📊 Progression</h3>
+                <h3 style="font-size: 1rem; color: var(--text-gray);">📊 PROGRESSION</h3>
                 <div id="acquisition-diagram-container"></div>
             </div>
 
             <div class="main-border">
-                <h3>🛠️ Atelier</h3>
+                <h3 style="font-size: 1rem; color: var(--text-gray);">🛠️ ATELIER</h3>
                 <form id="production-form">
-                    <input type="number" id="time-allocated" value="1" min="1" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px;">
+                    <input type="number" id="time-allocated" value="1" min="1" style="width:100%; padding:12px; border-radius:4px; border:1px solid var(--border); background: rgba(0,0,0,0.3); color: white; margin-bottom:10px;">
                     <button type="submit" id="btn-produce" class="checkout-btn">TRAVAILLER</button>
                 </form>
                 <div id="worker-zone" class="hidden">
@@ -180,27 +172,38 @@ body {
     </main>
 
     <aside id="help-panel" class="side-drawer">
-        <div class="drawer-header"><h2>📖 Guide Pro</h2><button class="close-btn" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content">
-            <div style="background:var(--bg-light); padding:15px; border-radius:15px; border-left:5px solid var(--primary);">
-                <h4>Comment jouer ?</h4>
-                <p>1. Produisez des crédits dans l'atelier.<br>2. Glissez les compétences vers le panier 🛒.<br>3. <b>Revendez</b> vos acquis à 50% dans l'inventaire 🎒.</p>
+        <div class="drawer-header"><h2>📖 Guide Utilisateur</h2><button class="close-btn" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">×</button></div>
+        <div class="drawer-content" style="padding: 20px;">
+            <div style="background: rgba(255,255,255,0.03); padding:20px; border-radius:8px; border-left:4px solid var(--primary); margin-bottom: 25px;">
+                <h4 style="color: var(--primary); margin-bottom: 10px;">🚀 Lien du Projet</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">Cette application est hébergée sur GitHub Pages pour une consultation en ligne :</p>
+                <a href="https://fd-top.github.io/Skillshop/" target="_blank" style="color:var(--primary); font-weight:700; text-decoration: none;">fd-top.github.io/Skillshop/</a>
             </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="margin-bottom: 10px;">🕹️ Mécaniques de jeu</h4>
+                <ul style="color: var(--text-gray); font-size: 0.9rem; list-style: none;">
+                    <li style="margin-bottom: 8px;">• <b>Gains :</b> Produisez des crédits dans l'atelier (20C par heure allouée).</li>
+                    <li style="margin-bottom: 8px;">• <b>Achats :</b> Glissez une carte compétence sur l'icône 🛒 ou utilisez le bouton direct.</li>
+                    <li style="margin-bottom: 8px;">• <b>Économie :</b> Revendez vos acquis à <b>50%</b> de leur valeur dans l'inventaire 🎒.</li>
+                    <li>• <b>Persistance :</b> Votre progression est sauvegardée localement dans votre navigateur.</li>
+                </ul>
+            </div>
+            
             <button class="checkout-btn close-btn" style="margin-top:20px;">COMPRIS</button>
         </div>
     </aside>
 
     <aside id="inventory-panel" class="side-drawer">
         <div class="drawer-header"><h2>🎒 Mon Savoir (Revente)</h2><button class="close-btn" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content" id="acquired-skills-list">
-            </div>
+        <div class="drawer-content" id="acquired-skills-list" style="padding: 20px;"></div>
     </aside>
 
     <aside id="cart-panel" class="side-drawer">
         <div class="drawer-header"><h2>🛒 Mon Panier</h2><button class="close-btn" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content">
+        <div class="drawer-content" style="padding: 20px;">
             <div id="cart-list"></div>
-            <div style="margin-top:20px; padding-top:15px; border-top:2px dashed var(--border);">
+            <div style="margin-top:20px; padding-top:15px; border-top:1px solid var(--border);">
                 <div style="display:flex; justify-content:space-between; font-weight:900; font-size:1.2rem;">
                     <span>TOTAL:</span> <span><span id="cart-total">0</span> C</span>
                 </div>
@@ -210,10 +213,11 @@ body {
     </aside>
 
     <div id="custom-alert" class="modal-overlay">
-        <div class="modal-content"><h3>⚠️ Solde Insuffisant</h3><button id="close-alert-btn" class="checkout-btn">RETOUR</button></div>
+        <div class="modal-content"><h3>⚠️ Solde Insuffisant</h3><button id="close-alert-btn" class="checkout-btn" style="margin-top: 20px;">RETOUR</button></div>
     </div>
 
     <script>
+        
         document.addEventListener('DOMContentLoaded', () => {
             const CATALOGUE = [
                 { id: 1, name: "HTML5", price: 100, desc: "Sémantique Web." },
@@ -234,12 +238,10 @@ body {
             };
 
             const updateUI = () => {
-                document.documentElement.setAttribute('data-theme', state.theme);
                 document.getElementById('credit-balance').innerText = Math.floor(state.credits);
                 document.getElementById('cart-count').innerText = state.cart.length;
                 document.getElementById('acquired-count').innerText = state.acquired.length;
 
-                // CATALOGUE + DRAG
                 const list = document.getElementById('skills-list');
                 list.innerHTML = '';
                 CATALOGUE.filter(s => !state.acquired.includes(s.name)).forEach(skill => {
@@ -247,46 +249,46 @@ body {
                     card.className = 'skill-card';
                     card.draggable = true;
                     card.innerHTML = `
-                        <strong>${skill.name}</strong><small>${skill.desc}</small>
+                        <strong style="color: var(--primary)">${skill.name}</strong>
+                        <small style="color: var(--text-gray)">${skill.desc}</small>
                         <span class="skill-price">${skill.price} C</span>
-                        <div class="action-buttons">
-                            <button onclick="addToCart(${skill.id})" style="background:var(--primary); color:white;">🛒</button>
-                            <button onclick="buyDirect(${skill.id})" style="background:var(--success); color:white;">BUY</button>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="addToCart(${skill.id})" style="background: rgba(255,255,255,0.05); color:white; border: 1px solid var(--border); padding: 8px; border-radius: 4px; flex: 1; cursor: pointer;">🛒</button>
+                            <button onclick="buyDirect(${skill.id})" style="background: var(--success); color:var(--bg-dark); border:none; padding: 8px; border-radius: 4px; flex: 2; font-weight: bold; cursor: pointer;">ACHETER</button>
                         </div>`;
                     card.ondragstart = (e) => e.dataTransfer.setData('text', skill.id);
                     list.appendChild(card);
                 });
 
-                // REVENTE (DANS L'INVENTAIRE)
                 document.getElementById('acquired-skills-list').innerHTML = state.acquired.map(name => {
                     const s = CATALOGUE.find(sk => sk.name === name);
                     const sellPrice = Math.floor((s ? s.price : 100) / 2);
                     return `
                         <div class="item-card">
                             <span>✅ ${name}</span>
-                            <button onclick="sellItem('${name}', ${sellPrice})" style="background:var(--danger); color:white; border:none; padding:5px 10px; border-radius:8px; cursor:pointer;">Vendre (${sellPrice}C)</button>
+                            <button onclick="sellItem('${name}', ${sellPrice})" style="background:var(--danger); color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; font-size: 0.8rem;">Vendre (${sellPrice}C)</button>
                         </div>`;
                 }).join('');
 
-                // PANIER
                 document.getElementById('cart-list').innerHTML = state.cart.map((item, i) => `
                     <div class="item-card">
-                        <span>${item.name} (${item.price}C)</span>
-                        <button onclick="removeFromCart(${i})" style="color:var(--danger); background:none; border:none; cursor:pointer; font-weight:bold;">✖</button>
+                        <span style="font-size: 0.9rem;">${item.name} (${item.price}C)</span>
+                        <button onclick="removeFromCart(${i})" style="color:var(--danger); background:none; border:none; cursor:pointer;">✖</button>
                     </div>`).join('');
                 document.getElementById('cart-total').innerText = state.cart.reduce((s,i) => s + i.price, 0);
 
-                // PROGRESSION
                 document.getElementById('acquisition-diagram-container').innerHTML = STAGES.map(stage => {
                     const has = stage.requiredSkills.filter(s => state.acquired.includes(s)).length;
                     const pc = (has / stage.requiredSkills.length) * 100;
-                    return `<small>${stage.name}</small><div class="progress-bar"><div class="progress-fill" style="width:${pc}%"></div></div>`;
+                    return `<div style="margin-bottom: 10px;">
+                        <small style="font-size: 0.7rem; color: var(--text-gray)">${stage.name}</small>
+                        <div class="progress-bar"><div class="progress-fill" style="width:${pc}%"></div></div>
+                    </div>`;
                 }).join('');
 
                 localStorage.setItem('skillShop_final_V2', JSON.stringify(state));
             };
 
-            // LOGIQUE
             window.addToCart = (id) => {
                 const item = CATALOGUE.find(s => s.id === id);
                 if(item && !state.cart.find(c => c.id === id)) { state.cart.push(item); updateUI(); }
@@ -308,23 +310,19 @@ body {
 
             window.removeFromCart = (i) => { state.cart.splice(i,1); updateUI(); };
 
-            // DRAG & DROP
-            const cI = document.getElementById('cart-icon');
-            cI.ondragover = (e) => { e.preventDefault(); cI.classList.add('drag-over'); };
-            cI.ondragleave = () => cI.classList.remove('drag-over');
-            cI.ondrop = (e) => {
-                cI.classList.remove('drag-over');
+            const cartIcon = document.getElementById('cart-icon');
+            cartIcon.ondragover = (e) => { e.preventDefault(); cartIcon.style.borderColor = "var(--primary)"; };
+            cartIcon.ondrop = (e) => {
+                cartIcon.style.borderColor = "var(--border)";
                 const id = parseInt(e.dataTransfer.getData('text'));
                 if(id) addToCart(id);
             };
 
-            // UI CONTROLS
             const toggle = (id, s) => document.getElementById(id).classList.toggle('visible', s);
             document.getElementById('nav-help-trigger').onclick = () => toggle('help-panel', true);
             document.getElementById('inventory-icon').onclick = () => toggle('inventory-panel', true);
             document.getElementById('cart-icon').onclick = () => toggle('cart-panel', true);
             document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible')));
-            document.getElementById('mode-toggle-btn').onclick = () => { state.theme = state.theme==='dark'?'light':'dark'; updateUI(); };
             document.getElementById('close-alert-btn').onclick = () => document.getElementById('custom-alert').style.display='none';
 
             document.getElementById('validate-purchase-btn').onclick = () => {
