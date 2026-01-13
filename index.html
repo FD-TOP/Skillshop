@@ -111,14 +111,29 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
         </div>
     </header>
 
-    <aside id="help-panel" class="side-drawer">
-        <div class="drawer-header"><h2>📖 Guide</h2><button class="close-drawer-x">×</button></div>
-        <div class="drawer-content">
-            <div class="guide-item-modern">Gagnez 20C par heure de travail simulée.</div>
-            <div class="guide-item-modern">Revendez vos acquis à 50% du prix d'achat.</div>
-            <button id="close-guide-action" class="checkout-btn">COMPRIS</button>
+  <aside id="help-panel" class="side-drawer">
+        <div class="drawer-header"><h2>📖 Mode d'emploi</h2><button id="close-help-btn" class="close-drawer-x">×</button></div>
+        <div class="drawer-content guide-scroll">
+            <div class="guide-item-modern">
+                <div class="guide-number">1</div>
+                <div><h4>🛠️ Production</h4><p>Gagnez 20C/h en lançant l'ouvrier 👨‍🔧 (3s d'attente).</p></div>
+            </div>
+            <div class="guide-item-modern">
+                <div class="guide-number">2</div>
+                <div><h4>💰 Revente</h4><p>Vendez vos acquis à <b>50% du prix</b> dans l'inventaire 🎒.</p></div>
+            </div>
+            <div class="guide-item-modern">
+                <div class="guide-number">3</div>
+                <div><h4>🛒 Shopping</h4><p>Glissez (Drag) les skills vers le haut ou achetez-les direct.</p></div>
+            </div>
+            <div class="guide-item-modern">
+                <div class="guide-number">4</div>
+                <div><h4>⌨️ Raccourci</h4><p>Touche <b>"C"</b> pour vider le panier d'un coup.</p></div>
+            </div>
+            <button id="close-guide-action" class="checkout-btn">D'ACCORD</button>
         </div>
     </aside>
+
 
     <aside id="inventory-panel" class="side-drawer">
         <div class="drawer-header"><h2>🎒 Mon Savoir</h2><button class="close-drawer-x">×</button></div>
