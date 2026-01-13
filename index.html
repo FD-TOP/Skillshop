@@ -7,96 +7,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-   :root {
-    --primary: #6A1B9A; --primary-dark: #4527A0; --gold: #FFD700;
-    --bg-light: #F4F7FE; --surface: #ffffff; --text: #1A0633; --border: #E2E8F0; --success: #388E3C;
-}
-[data-theme="dark"] { --bg-light: #0F0A1E; --surface: #1A142D; --text: #F3E5F5; --border: #2D2445; }
+        :root {
+            --primary: #6A1B9A; --primary-dark: #4527A0; --gold: #FFD700;
+            --bg-light: #F4F7FE; --surface: #ffffff; --text: #1A0633; --border: #E2E8F0; --success: #388E3C;
+            --text-muted: #64748b;
+        }
+        [data-theme="dark"] { --bg-light: #0F0A1E; --surface: #1A142D; --text: #F3E5F5; --border: #2D2445; }
 
-body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: var(--text); margin: 0; transition: 0.3s; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: var(--text); margin: 0; transition: 0.3s; padding-top: 80px; }
 
-.main-header { position: fixed; top: 0; width: 100%; height: 75px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; z-index: 1000; color: white; box-sizing: border-box; }
-.icon-btn { background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 12px; cursor: pointer; position: relative; font-size: 1.2rem; }
-.badge { position: absolute; top: -5px; right: -5px; background: #FF3D00; color: white; font-size: 0.7rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); }
+        .main-header { position: fixed; top: 0; width: 100%; height: 75px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; z-index: 1000; color: white; box-sizing: border-box; }
+        .icon-btn { background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 12px; cursor: pointer; position: relative; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .badge { position: absolute; top: -5px; right: -5px; background: #FF3D00; color: white; font-size: 0.7rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); }
 
-.main-content { margin-top: 100px; display: flex; max-width: 1450px; margin-inline: auto; padding: 20px; gap: 30px; }
-.skills-catalog { flex: 2.8; }
-.sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; height: fit-content; }
-.balance-gold { font-size: 2.5rem; font-weight: 800; color: var(--gold); text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3); text-align: center; }
-.main-border { background: var(--surface); border-radius: 20px; padding: 25px; border: 1px solid var(--border); }
+        .main-content { display: flex; max-width: 1450px; margin-inline: auto; padding: 20px; gap: 30px; }
+        .skills-catalog { flex: 2.8; }
+        .sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; height: fit-content; }
+        .balance-gold { font-size: 2.5rem; font-weight: 800; color: var(--gold); text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3); text-align: center; }
+        .main-border { background: var(--surface); border-radius: 20px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 
-.cart-container { display: flex; flex-direction: column; height: calc(100vh - 80px); }
-.cart-items-list { flex-grow: 1; overflow-y: auto; padding: 15px; }
+        .cart-container { display: flex; flex-direction: column; }
+        .cart-items-list { overflow-y: auto; max-height: 400px; padding: 10px 0; }
 
-.cart-card { 
-    background: var(--bg-light); padding: 15px; border-radius: 12px; 
-    margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
-    border: 1px solid var(--border);
-}
-.cart-card b { color: var(--primary); }
-.btn-remove { background: none; border: none; color: #ef4444; font-size: 1.2rem; cursor: pointer; padding: 5px; }
+        .cart-card { 
+            background: var(--bg-light); padding: 15px; border-radius: 12px; 
+            margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--border);
+        }
+        .btn-remove { background: none; border: none; color: #ef4444; font-size: 1.2rem; cursor: pointer; }
 
-.cart-summary { background: var(--surface); padding: 25px; border-top: 2px solid var(--border); box-shadow: 0 -5px 15px rgba(0,0,0,0.03); }
-.summary-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; }
-.total-line { font-weight: 800; font-size: 1.3rem; color: var(--primary); margin-top: 5px; padding-top: 5px; border-top: 1px dashed var(--border); }
+        .cart-summary { background: var(--surface); padding: 20px 0; border-top: 2px solid var(--border); }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
+        .total-line { font-weight: 800; font-size: 1.3rem; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 10px; }
 
-.guide-item-modern { display: flex; gap: 15px; margin-bottom: 15px; padding: 15px; background: var(--bg-light); border-radius: 12px; }
-.guide-number { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .guide-item-modern { display: flex; gap: 15px; margin-bottom: 15px; padding: 15px; background: var(--bg-light); border-radius: 12px; }
+        .guide-number { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
 
-.skill-card { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 16px; margin-bottom: 15px; }
-.action-buttons { display: flex; gap: 10px; }
-.action-buttons button { height: 48px; width: 110px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.btn-add-cart { background: var(--primary); color: white; font-size: 1.3rem; }
-.btn-direct-buy { background: var(--success); color: white; font-size: 0.85rem; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .skill-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 15px; }
+        .skill-price { color: var(--primary); font-weight: 800; font-size: 1.2rem; }
 
-.side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 380px; background: var(--surface); transform: translateX(100%); transition: 0.4s; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
-.side-drawer.visible { transform: translateX(0); }
-.drawer-header { background: var(--primary); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-.close-drawer-x { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; line-height: 1; }
-.progress-bar { background: var(--border); height: 10px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
-.progress-fill { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); height: 100%; transition: width 0.6s; }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 5000; }
-.checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; }
-.hidden { display: none !important; }
+        .action-buttons { display: flex; gap: 10px; }
+        .action-buttons button { height: 40px; flex: 1; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-add-cart { background: var(--primary); color: white; }
+        .btn-direct-buy { background: var(--success); color: white; }
 
-#worker-zone { text-align: center; margin-top: 15px; }
-.worker-man { font-size: 40px; position: relative; display: inline-block; animation: jump 0.5s infinite; }
-.hammer { position: absolute; right: -15px; animation: hit 0.5s infinite; transform-origin: bottom left; }
-@keyframes hit { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-60deg); } }
-@keyframes jump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 380px; background: var(--surface); transform: translateX(100%); transition: 0.4s; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        .side-drawer.visible { transform: translateX(0); }
+        .drawer-header { background: var(--primary); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .close-drawer-x { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        
+        .drawer-content { padding: 20px; overflow-y: auto; flex: 1; }
 
-.modal-content {
-    background: var(--surface); 
-    color: var(--text);        
-    padding: 30px;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    border: 1px solid var(--border);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
+        .progress-bar { background: var(--border); height: 10px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+        .progress-fill { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); height: 100%; transition: width 0.6s; width: 0%; }
 
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6); 
-    backdrop-filter: blur(8px);    
-    display: none; 
-    align-items: center; 
-    justify-content: center; 
-    z-index: 5000;
-}
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 5000; }
+        .modal-content { background: var(--surface); color: var(--text); padding: 30px; border-radius: 24px; text-align: center; max-width: 400px; width: 90%; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+        .hidden { display: none !important; }
 
-.alert-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
-}
-
-.modal-content h3 {
-    margin-top: 0;
-    color: var(--primary);
-}}
+        #worker-zone { text-align: center; margin-top: 15px; }
+        .worker-man { font-size: 40px; position: relative; display: inline-block; animation: jump 0.5s infinite; }
+        .hammer { position: absolute; right: -15px; animation: hit 0.5s infinite; transform-origin: bottom left; }
+        @keyframes hit { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-60deg); } }
+        @keyframes jump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
 <body>
@@ -111,29 +86,20 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
         </div>
     </header>
 
-  <aside id="help-panel" class="side-drawer">
-        <div class="drawer-header"><h2>📖 Mode d'emploi</h2><button id="close-help-btn" class="close-drawer-x">×</button></div>
-        <div class="drawer-content guide-scroll">
+    <aside id="help-panel" class="side-drawer">
+        <div class="drawer-header"><h2>📖 Mode d'emploi</h2><button class="close-drawer-x close-help-trigger">×</button></div>
+        <div class="drawer-content">
             <div class="guide-item-modern">
                 <div class="guide-number">1</div>
-                <div><h4>🛠️ Production</h4><p>Gagnez 20C/h en lançant l'ouvrier 👨‍🔧 (3s d'attente).</p></div>
+                <div><h4>🛠️ Production</h4><p>Gagnez 20C/h avec l'ouvrier 👨‍🔧.</p></div>
             </div>
             <div class="guide-item-modern">
                 <div class="guide-number">2</div>
-                <div><h4>💰 Revente</h4><p>Vendez vos acquis à <b>50% du prix</b> dans l'inventaire 🎒.</p></div>
-            </div>
-            <div class="guide-item-modern">
-                <div class="guide-number">3</div>
-                <div><h4>🛒 Shopping</h4><p>Glissez (Drag) les skills vers le haut ou achetez-les direct.</p></div>
-            </div>
-            <div class="guide-item-modern">
-                <div class="guide-number">4</div>
-                <div><h4>⌨️ Raccourci</h4><p>Touche <b>"C"</b> pour vider le panier d'un coup.</p></div>
+                <div><h4>💰 Revente</h4><p>Vendez vos acquis à 50% du prix.</p></div>
             </div>
             <button id="close-guide-action" class="checkout-btn">D'ACCORD</button>
         </div>
     </aside>
-
 
     <aside id="inventory-panel" class="side-drawer">
         <div class="drawer-header"><h2>🎒 Mon Savoir</h2><button class="close-drawer-x">×</button></div>
@@ -142,10 +108,10 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
 
     <aside id="cart-panel" class="side-drawer">
         <div class="drawer-header"><h2>🛒 Panier</h2><button class="close-drawer-x">×</button></div>
-        <div class="cart-container">
+        <div class="drawer-content">
             <div id="cart-list" class="cart-items-list"></div>
             <div class="cart-summary">
-                <div class="summary-line"><span>Total</span><span id="cart-total">0</span> C</div>
+                <div class="summary-line total-line"><span>Total</span><span><span id="cart-total">0</span> C</span></div>
                 <button id="validate-purchase-btn" class="checkout-btn">VALIDER L'ACHAT</button>
             </div>
         </div>
@@ -153,9 +119,9 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
 
     <div id="custom-alert" class="modal-overlay">
         <div class="modal-content">
-            <div class="alert-icon">⚠️</div>
+            <div style="font-size: 3rem;">⚠️</div>
             <h3>Solde Insuffisant</h3>
-            <p>Travaillez à l'atelier pour gagner plus de crédits !</p>
+            <p>Travaillez à l'atelier pour recharger vos crédits !</p>
             <button id="close-alert-btn" class="checkout-btn">RETOUR</button>
         </div>
     </div>
@@ -190,7 +156,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
             <div class="main-border">
                 <h3>🛠️ Atelier</h3>
                 <form id="production-form">
-                    <input type="number" id="time-allocated" value="1" min="1" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border);">
+                    <input type="number" id="time-allocated" value="1" min="1" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-light); color: var(--text);">
                     <button type="submit" id="btn-produce" class="checkout-btn" style="margin:0">PRODUIRE DES CRÉDITS</button>
                 </form>
                 <div id="worker-zone" class="hidden">
@@ -227,16 +193,11 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
             const save = () => localStorage.setItem('skillShop_final_V2', JSON.stringify(state));
 
             const updateUI = () => {
-                // Thème
                 document.documentElement.setAttribute('data-theme', state.theme);
-                document.getElementById('mode-toggle-btn').innerText = state.theme === 'dark' ? '☀️' : '🌙';
-
-                // Balances
                 document.getElementById('credit-balance').innerText = Math.floor(state.credits);
                 document.getElementById('cart-count').innerText = state.cart.length;
                 document.getElementById('acquired-count').innerText = state.acquired.length;
 
-                // Catalogue
                 const list = document.getElementById('skills-list');
                 list.innerHTML = '';
                 CATALOGUE.filter(s => !state.acquired.includes(s.name)).forEach(skill => {
@@ -255,7 +216,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                     list.appendChild(card);
                 });
 
-                // Progression
                 document.getElementById('acquisition-diagram-container').innerHTML = STAGES.map(stage => {
                     const has = stage.requiredSkills.filter(s => state.acquired.includes(s)).length;
                     const pc = (has / stage.requiredSkills.length) * 100;
@@ -269,7 +229,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                     </div>`;
                 }).join('');
 
-                // Panier
                 const currentTotal = state.cart.reduce((s,i) => s + i.price, 0);
                 document.getElementById('cart-list').innerHTML = state.cart.map((item, idx) => `
                     <div class="cart-card">
@@ -278,7 +237,6 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                     </div>`).join('');
                 document.getElementById('cart-total').innerText = currentTotal;
 
-                // Inventaire
                 document.getElementById('acquired-skills-list').innerHTML = state.acquired.map(name => {
                     const s = CATALOGUE.find(sk => sk.name === name);
                     const ref = s ? Math.floor(s.price/2) : 0;
@@ -287,17 +245,13 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                         <button onclick="sellItem('${name}', ${ref})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.8rem">Vendre (${ref}C)</button>
                     </div>`;
                 }).join('');
-
                 save();
             };
 
-            // Fonctions globales
             window.addToCart = (id) => {
                 const item = CATALOGUE.find(s => s.id === id);
-                if(!state.cart.find(c => c.id === id)) {
-                    state.cart.push(item);
-                    updateUI();
-                }
+                if(!state.cart.find(c => c.id === id)) state.cart.push(item);
+                updateUI();
             };
 
             window.buyDirect = (id) => {
@@ -306,13 +260,9 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                     state.credits -= s.price;
                     state.acquired.push(s.name);
                     updateUI();
-                } else {
-                    document.getElementById('custom-alert').style.display = 'flex';
-                }
+                } else document.getElementById('custom-alert').style.display = 'flex';
             };
 
-            window.removeFromCart = (i) => { state.cart.splice(i,1); updateUI(); };
-            
             window.sellItem = (name, price) => {
                 if(confirm(`Vendre "${name}" pour ${price}C ?`)) {
                     state.credits += price;
@@ -321,12 +271,12 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                 }
             };
 
-            // Event Listeners UI
-            const togglePanel = (id, visible) => document.getElementById(id).classList.toggle('visible', visible);
-            
-            document.getElementById('help-btn').onclick = () => togglePanel('help-panel', true);
-            document.getElementById('inventory-icon').onclick = () => togglePanel('inventory-panel', true);
-            document.getElementById('cart-icon').onclick = () => togglePanel('cart-panel', true);
+            window.removeFromCart = (i) => { state.cart.splice(i,1); updateUI(); };
+
+            const pan = (id, s) => document.getElementById(id).classList.toggle('visible', s);
+            document.getElementById('help-btn').onclick = () => pan('help-panel', true);
+            document.getElementById('inventory-icon').onclick = () => pan('inventory-panel', true);
+            document.getElementById('cart-icon').onclick = () => pan('cart-panel', true);
             
             document.querySelectorAll('.close-drawer-x, #close-guide-action').forEach(btn => {
                 btn.onclick = () => document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible'));
@@ -339,35 +289,30 @@ body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: va
                 updateUI();
             };
 
-            // Production
             document.getElementById('production-form').onsubmit = (e) => {
                 e.preventDefault();
                 const hours = parseInt(document.getElementById('time-allocated').value);
                 const btn = document.getElementById('btn-produce');
                 const workZone = document.getElementById('worker-zone');
-                
                 btn.disabled = true;
                 workZone.classList.remove('hidden');
-                
                 setTimeout(() => {
                     state.credits += hours * 20;
                     btn.disabled = false;
                     workZone.classList.add('hidden');
                     updateUI();
-                }, 2000); // 2 secondes de travail
+                }, 2000);
             };
 
             document.getElementById('validate-purchase-btn').onclick = () => {
                 const total = state.cart.reduce((s,i) => s + i.price, 0);
-                if(state.cart.length === 0) return;
-                
-                if(state.credits >= total) {
+                if(state.cart.length > 0 && state.credits >= total) {
                     state.credits -= total;
                     state.cart.forEach(item => state.acquired.push(item.name));
                     state.cart = [];
                     updateUI();
-                    togglePanel('cart-panel', false);
-                } else {
+                    pan('cart-panel', false);
+                } else if(state.cart.length > 0) {
                     document.getElementById('custom-alert').style.display = 'flex';
                 }
             };
