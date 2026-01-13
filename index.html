@@ -6,106 +6,50 @@
     <title>Skill-Shop | Dashboard Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* VARIABLES DE THÈME DYNAMIQUES */
         :root {
-            /* Mode Sombre (Par défaut) */
             --bg-body: #0a0b10;
             --bg-card: rgba(20, 22, 30, 0.9);
             --text-main: #ffffff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
             --primary: #00d2ff;
-            --primary-glow: rgba(0, 210, 255, 0.3);
             --success: #10b981;
             --danger: #f43f5e;
         }
 
         [data-theme="light"] {
-            /* Mode Clair (Activé via JS) */
             --bg-body: #f1f5f9;
             --bg-card: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
             --primary: #0284c7;
-            --primary-glow: rgba(2, 132, 199, 0.2);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-top: 90px; min-height: 100vh; transition: 0.3s; }
 
-        body { 
-            background-color: var(--bg-body); 
-            color: var(--text-main); 
-            padding-top: 90px;
-            min-height: 100vh;
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
+        .main-header { position: fixed; top: 0; width: 100%; height: 75px; background: var(--bg-card); backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-weight: 800; color: var(--primary); text-transform: uppercase; }
 
-        /* HEADER */
-        .main-header { 
-            position: fixed; top: 0; width: 100%; height: 75px; 
-            background: var(--bg-card); backdrop-filter: blur(15px);
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 0 40px; z-index: 1000; border-bottom: 1px solid var(--border);
-        }
+        .icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 42px; height: 42px; border-radius: 8px; cursor: pointer; position: relative; font-size: 1.2rem; }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: var(--primary); text-transform: uppercase; }
-
-        .nav-instruction-btn {
-            background: transparent; border: 1px solid var(--primary);
-            color: var(--primary); padding: 8px 20px; border-radius: 6px;
-            cursor: pointer; font-weight: 600; font-size: 0.8rem;
-        }
-
-        .header-right { display: flex; gap: 15px; }
-
-        .icon-btn { 
-            background: transparent; border: 1px solid var(--border); color: var(--text-main); 
-            width: 45px; height: 45px; border-radius: 8px; cursor: pointer; position: relative;
-            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-        }
-
-        .icon-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0,0,0,0.05); }
-
-        .badge { 
-            position: absolute; top: -5px; right: -5px; background: var(--danger); 
-            color: white; font-size: 0.7rem; font-weight: 900; 
-            width: 20px; height: 20px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        /* CONTENU */
         .main-content { display: flex; max-width: 1400px; margin: 0 auto; padding: 20px; gap: 30px; }
-        .skills-catalog { flex: 3; }
         .sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
+        .skills-catalog { flex: 3; }
 
         .main-border { background: var(--bg-card); border-radius: 12px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .skill-card { background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
 
-        .skill-card { 
-            background: var(--bg-card); border: 1px solid var(--border); 
-            padding: 20px; border-radius: 8px; margin-bottom: 15px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .skill-price { font-weight: 800; color: var(--primary); font-size: 1.2rem; }
-
-        /* DRAWERS */
-        .side-drawer { 
-            position: fixed; top: 0; right: 0; height: 100vh; width: 450px; 
-            background: var(--bg-card); transform: translateX(100%); 
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; 
-            border-left: 1px solid var(--border); display: flex; flex-direction: column; 
-            backdrop-filter: blur(25px);
-        }
+        .side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 450px; background: var(--bg-card); transform: translateX(100%); transition: 0.4s ease; z-index: 2000; border-left: 1px solid var(--border); backdrop-filter: blur(20px); overflow-y: auto; }
         .side-drawer.visible { transform: translateX(0); }
         .drawer-header { padding: 30px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 
-        .checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: #000; border: none; border-radius: 6px; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-        .checkout-btn:hover { filter: brightness(1.1); }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: #000; border: none; border-radius: 6px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+        .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(1); }
 
         .hidden { display: none !important; }
-
-        /* INSTRUCTIONS TEXT */
         .guide-box { background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--primary); }
     </style>
 </head>
@@ -114,9 +58,9 @@
     <header class="main-header">
         <div class="header-left">
             <div class="logo">Skill-Shop</div>
-            <button id="nav-help-trigger" class="nav-instruction-btn">📖 MODE D'EMPLOI</button>
+            <button id="nav-help-trigger" style="margin-left:20px; cursor:pointer; background:none; border:1px solid var(--primary); color:var(--primary); padding:5px 15px; border-radius:4px;">📖 INSTRUCTIONS</button>
         </div>
-        <div class="header-right">
+        <div class="header-right" style="display:flex; gap:10px;">
             <button id="inventory-icon" class="icon-btn">🎒 <span class="badge" id="acquired-count">0</span></button>
             <button id="cart-icon" class="icon-btn">🛒 <span class="badge" id="cart-count">0</span></button>
             <button id="mode-toggle-btn" class="icon-btn">🌙</button>
@@ -126,67 +70,66 @@
     <main class="main-content">
         <section class="skills-catalog">
             <div class="main-border">
-                <h2 style="margin-bottom: 20px;">Compétences disponibles</h2>
-                <div id="skills-list"></div>
+                <h2>Catalogue de Compétences</h2>
+                <div id="skills-list" style="margin-top:20px;"></div>
             </div>
         </section>
         
         <aside class="sidebar-right">
             <div class="main-border">
                 <small style="color: var(--text-muted)">SOLDE ACTUEL</small>
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);" id="credit-balance">1000</div>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><span id="credit-balance">1000</span> C</div>
             </div>
+            
             <div class="main-border">
-                <h3>🛠️ Atelier</h3>
-                <p style="font-size: 0.85rem; margin: 10px 0;">Produisez des crédits ici.</p>
-                <button id="btn-produce" class="checkout-btn">TRAVAILLER (+20C)</button>
-                <div id="worker-zone" class="hidden" style="text-align: center; margin-top: 10px;">⚡ Production en cours...</div>
+                <h3>🛠️ Atelier de Production</h3>
+                <p style="font-size: 0.85rem; margin: 10px 0; color: var(--text-muted);">Générez 20 crédits par session de travail.</p>
+                <button id="btn-produce-action" class="checkout-btn">LANCER LA PRODUCTION</button>
+                <div id="worker-status" class="hidden" style="text-align: center; margin-top: 15px; color: var(--success);">
+                    ⚡ <b>Production en cours...</b> (Patientez 2s)
+                </div>
             </div>
         </aside>
     </main>
 
     <aside id="help-panel" class="side-drawer">
-        <div class="drawer-header"><h2>📖 Manuel d'utilisation</h2><button class="close-btn" style="background:none; border:none; color:inherit; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content" style="padding: 20px; overflow-y: auto;">
+        <div class="drawer-header"><h2>📖 Manuel Complet</h2><button class="close-btn" style="background:none; border:none; color:inherit; font-size:2rem; cursor:pointer;">×</button></div>
+        <div class="drawer-content" style="padding: 20px;">
             
             <div class="guide-box">
-                <h4>🌗 Système de Thème</h4>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">
-                    L'application utilise l'attribut <b>data-theme</b> sur l'élément racine. Le JavaScript bascule entre 'light' et 'dark', ce qui met à jour instantanément les variables CSS. Votre choix est mémorisé via le <b>LocalStorage</b>.
+                <h4>🛠️ Fonctionnement de la Production</h4>
+                <p style="font-size: 0.9rem; margin-top:5px;">
+                    La production simule une tâche serveur asynchrone :
                 </p>
+                
+                <ul style="font-size: 0.85rem; margin-top: 10px; padding-left: 20px;">
+                    <li>Le bouton déclenche une fonction <code>setTimeout</code>.</li>
+                    <li>Le bouton est <b>désactivé</b> pendant 2 secondes pour éviter le spam.</li>
+                    <li>Une fois le délai écoulé, l'état global est mis à jour et l'interface se rafraîchit.</li>
+                </ul>
             </div>
 
             <div class="guide-box">
-                <h4>🕹️ Gameplay</h4>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">
-                    1. <b>Gagnez :</b> Utilisez l'atelier pour augmenter votre solde.<br>
-                    2. <b>Achetez :</b> Cliquez sur 🛒 pour ajouter au panier.<br>
-                    3. <b>Possédez :</b> Validez votre panier pour débloquer les compétences.<br>
-                    4. <b>Gérez :</b> Revendez vos acquis à 50% de leur prix dans l'inventaire 🎒.
+                <h4>🌓 Modes d'Affichage</h4>
+                <p style="font-size: 0.9rem;">
+                    Le changement de mode bascule l'attribut <code>data-theme</code> sur la racine HTML, modifiant instantanément toutes les variables CSS du projet.
                 </p>
             </div>
 
-            <div style="padding: 10px; border: 1px dashed var(--border); font-size: 0.8rem; color: var(--text-muted);">
-                <b>Version Live :</b> <a href="https://fd-top.github.io/Skillshop/" target="_blank" style="color: var(--primary)">Consulter sur GitHub Pages</a>
-            </div>
-
-            <button class="checkout-btn close-btn" style="margin-top:20px;">FERMER</button>
+            <button class="checkout-btn close-btn">FERMER LE GUIDE</button>
         </div>
     </aside>
 
     <aside id="inventory-panel" class="side-drawer">
-        <div class="drawer-header"><h2>🎒 Mon Savoir</h2><button class="close-btn" style="background:none; border:none; color:inherit; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content" id="acquired-skills-list" style="padding: 20px;"></div>
+        <div class="drawer-header"><h2>🎒 Inventaire</h2><button class="close-btn" style="background:none; border:none; color:inherit; font-size:2rem; cursor:pointer;">×</button></div>
+        <div id="acquired-skills-list" style="padding: 20px;"></div>
     </aside>
 
     <aside id="cart-panel" class="side-drawer">
         <div class="drawer-header"><h2>🛒 Panier</h2><button class="close-btn" style="background:none; border:none; color:inherit; font-size:2rem; cursor:pointer;">×</button></div>
-        <div class="drawer-content" style="padding: 20px;">
+        <div style="padding: 20px;">
             <div id="cart-list"></div>
-            <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
-                <h3>Total : <span id="cart-total">0</span> C</h3>
-                <button id="validate-purchase-btn" class="checkout-btn">CONFIRMER L'ACHAT</button>
-            </div>
+            <button id="validate-purchase-btn" class="checkout-btn">CONFIRMER L'ACHAT</button>
         </div>
     </aside>
 
@@ -195,8 +138,7 @@
             const CATALOGUE = [
                 { id: 1, name: "HTML5", price: 100 },
                 { id: 2, name: "CSS3", price: 150 },
-                { id: 3, name: "JS Base", price: 200 },
-                { id: 4, name: "React", price: 500 }
+                { id: 3, name: "JavaScript", price: 200 }
             ];
 
             let state = JSON.parse(localStorage.getItem('skillShop_final_V2')) || {
@@ -204,74 +146,58 @@
             };
 
             const updateUI = () => {
-                // APPLICATION DU THÈME (Correction majeure ici)
                 document.documentElement.setAttribute('data-theme', state.theme);
-                const themeBtn = document.getElementById('mode-toggle-btn');
-                themeBtn.innerText = state.theme === 'dark' ? '☀️' : '🌙';
-
-                // Balances
+                document.getElementById('mode-toggle-btn').innerText = state.theme === 'dark' ? '☀️' : '🌙';
                 document.getElementById('credit-balance').innerText = state.credits;
                 document.getElementById('cart-count').innerText = state.cart.length;
                 document.getElementById('acquired-count').innerText = state.acquired.length;
 
-                // Catalogue
                 const list = document.getElementById('skills-list');
                 list.innerHTML = CATALOGUE.filter(s => !state.acquired.includes(s.name)).map(skill => `
                     <div class="skill-card">
-                        <div>
-                            <strong>${skill.name}</strong><br>
-                            <span class="skill-price">${skill.price} C</span>
-                        </div>
-                        <button onclick="addToCart(${skill.id})" class="nav-instruction-btn">AJOUTER 🛒</button>
+                        <span><strong>${skill.name}</strong> (${skill.price} C)</span>
+                        <button onclick="addToCart(${skill.id})" style="cursor:pointer; padding:5px 10px;">🛒 Ajouter</button>
                     </div>
                 `).join('');
 
-                // Panier
-                document.getElementById('cart-list').innerHTML = state.cart.map((item, i) => `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                        <span>${item.name}</span>
-                        <button onclick="removeFromCart(${i})" style="color:var(--danger); border:none; background:none; cursor:pointer">Retirer</button>
-                    </div>
-                `).join('');
-                document.getElementById('cart-total').innerText = state.cart.reduce((sum, item) => sum + item.price, 0);
-
-                // Inventaire
                 document.getElementById('acquired-skills-list').innerHTML = state.acquired.map(name => `
-                    <div class="skill-card">
-                        <span>✅ ${name}</span>
-                        <button onclick="sellSkill('${name}')" style="font-size:0.7rem; color:var(--danger); cursor:pointer; background:none; border:1px solid var(--danger); padding:2px 5px; border-radius:4px;">REVENDRE</button>
-                    </div>
+                    <div class="skill-card"><span>✅ ${name}</span></div>
                 `).join('');
 
                 localStorage.setItem('skillShop_final_V2', JSON.stringify(state));
             };
 
-            // GESTION DU THÈME
+            // --- PRODUCTION CORRIGÉE ---
+            const btnProduce = document.getElementById('btn-produce-action');
+            const statusLabel = document.getElementById('worker-status');
+
+            btnProduce.onclick = () => {
+                // On désactive le bouton pour éviter les clics multiples
+                btnProduce.disabled = true;
+                btnProduce.innerText = "TRAVAIL EN COURS...";
+                statusLabel.classList.remove('hidden');
+
+                // Simulation de délai (Asynchrone)
+                setTimeout(() => {
+                    state.credits += 20;
+                    btnProduce.disabled = false;
+                    btnProduce.innerText = "LANCER LA PRODUCTION";
+                    statusLabel.classList.add('hidden');
+                    updateUI(); // On rafraîchit l'affichage
+                }, 2000);
+            };
+
+            // --- GESTION DU THÈME CORRIGÉE ---
             document.getElementById('mode-toggle-btn').onclick = () => {
                 state.theme = state.theme === 'dark' ? 'light' : 'dark';
                 updateUI();
             };
 
-            // LOGIQUE BOUTIQUE
+            // --- LOGIQUE PANIER ---
             window.addToCart = (id) => {
                 const item = CATALOGUE.find(s => s.id === id);
-                if(item && !state.cart.some(c => c.id === id)) {
+                if(item && !state.cart.find(c => c.id === id)) {
                     state.cart.push(item);
-                    updateUI();
-                }
-            };
-
-            window.removeFromCart = (index) => {
-                state.cart.splice(index, 1);
-                updateUI();
-            };
-
-            window.sellSkill = (name) => {
-                const skill = CATALOGUE.find(s => s.name === name);
-                const price = skill ? Math.floor(skill.price / 2) : 50;
-                if(confirm(`Voulez-vous revendre ${name} pour ${price}C ?`)) {
-                    state.credits += price;
-                    state.acquired = state.acquired.filter(n => n !== name);
                     updateUI();
                 }
             };
@@ -280,33 +206,18 @@
                 const total = state.cart.reduce((sum, item) => sum + item.price, 0);
                 if(state.credits >= total && state.cart.length > 0) {
                     state.credits -= total;
-                    state.cart.forEach(item => state.acquired.push(item.name));
+                    state.cart.forEach(i => state.acquired.push(i.name));
                     state.cart = [];
                     updateUI();
-                    alert("Achat réussi !");
-                } else {
-                    alert("Crédits insuffisants !");
                 }
             };
 
-            document.getElementById('btn-produce').onclick = () => {
-                const work = document.getElementById('worker-zone');
-                work.classList.remove('hidden');
-                setTimeout(() => {
-                    state.credits += 20;
-                    work.classList.add('hidden');
-                    updateUI();
-                }, 1000);
-            };
-
-            // UI PANELS
+            // PANELS
             const toggle = (id, s) => document.getElementById(id).classList.toggle('visible', s);
             document.getElementById('nav-help-trigger').onclick = () => toggle('help-panel', true);
             document.getElementById('inventory-icon').onclick = () => toggle('inventory-panel', true);
             document.getElementById('cart-icon').onclick = () => toggle('cart-panel', true);
-            document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => {
-                document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible'));
-            });
+            document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible')));
 
             updateUI();
         });
