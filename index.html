@@ -8,190 +8,154 @@
     
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --gold: #f59e0b;
+            --primary: #6A1B9A; --primary-dark: #4527A0; --gold: #FFD700;
+            --bg-light: #F4F7FE; --surface: #ffffff; --text: #1A0633; --border: #E2E8F0; --success: #388E3C;
+        }
+        [data-theme="dark"] { 
+            --bg-light: #0F0A1E; --surface: #1A142D; --text: #F3E5F5; --border: #2D2445; 
         }
 
-        [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-        }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg-light); color: var(--text); margin: 0; transition: 0.3s; padding-top: 80px; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; transition: 0.3s; }
+        /* HEADER */
+        .main-header { position: fixed; top: 0; width: 100%; height: 75px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; justify-content: space-between; align-items: center; padding: 0 40px; z-index: 1000; color: white; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .header-right { display: flex; gap: 10px; align-items: center; }
+        .icon-btn { background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 12px; cursor: pointer; position: relative; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .icon-btn:hover { background: rgba(255,255,255,0.25); }
+        .badge { position: absolute; top: -5px; right: -5px; background: #FF3D00; color: white; font-size: 0.7rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); }
 
-        body { background-color: var(--bg-body); color: var(--text-main); padding-top: 80px; }
+        /* LAYOUT */
+        .main-content { display: flex; max-width: 1450px; margin-inline: auto; padding: 20px; gap: 30px; }
+        .skills-catalog { flex: 2.8; }
+        .sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; height: fit-content; }
+        .main-border { background: var(--surface); border-radius: 20px; padding: 25px; border: 1px solid var(--border); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 
-        .main-header {
-            position: fixed; top: 0; width: 100%; height: 70px; background: var(--bg-card);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 2rem; border-bottom: 1px solid var(--border-color); z-index: 1000;
-        }
+        /* CATALOGUE */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .skill-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 15px; }
+        .skill-card strong { font-size: 1.1rem; }
+        .skill-price { color: var(--primary); font-weight: 800; font-size: 1.2rem; }
+        
+        .action-buttons { display: flex; gap: 10px; margin-top: auto; }
+        .action-buttons button { height: 45px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; flex: 1; }
+        .btn-add-cart { background: var(--primary); color: white; font-size: 1.1rem; }
+        .btn-direct-buy { background: var(--success); color: white; font-size: 0.85rem; }
 
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
+        /* DRAWERS */
+        .side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 380px; background: var(--surface); transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        .side-drawer.visible { transform: translateX(0); }
+        .drawer-header { background: var(--primary); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .close-drawer-x { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .drawer-content { padding: 20px; overflow-y: auto; flex: 1; }
 
-        .icon-btn {
-            background: var(--bg-body); border: 1px solid var(--border-color);
-            padding: 10px; border-radius: 12px; cursor: pointer; position: relative; margin-left: 10px;
-        }
+        /* CART & INVENTORY ITEMS */
+        .cart-card { background: var(--bg-light); padding: 15px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border); }
+        .cart-summary { padding: 20px; border-top: 2px solid var(--border); }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .total-line { font-weight: 800; font-size: 1.3rem; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 10px; }
 
-        .badge {
-            position: absolute; top: -5px; right: -5px; background: var(--primary);
-            color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px;
-        }
+        /* PROGRESSION */
+        .progress-bar { background: var(--border); height: 10px; border-radius: 10px; overflow: hidden; margin: 10px 0 20px 0; }
+        .progress-fill { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); height: 100%; transition: width 0.6s; width: 0%; }
+        .balance-gold { font-size: 2.5rem; font-weight: 800; color: var(--gold); text-shadow: 0 2px 10px rgba(255, 215, 0, 0.2); text-align: center; }
 
-        .main-content {
-            display: grid; grid-template-columns: 1fr 350px; gap: 2rem;
-            max-width: 1200px; margin: 0 auto; padding: 1rem;
-        }
+        /* WORKER */
+        #worker-zone { text-align: center; margin-top: 15px; }
+        .worker-man { font-size: 40px; position: relative; display: inline-block; animation: jump 0.5s infinite; }
+        .hammer { position: absolute; right: -15px; animation: hit 0.5s infinite; transform-origin: bottom left; }
+        @keyframes hit { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-60deg); } }
+        @keyframes jump { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-        .main-border {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 1.5rem; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 1.5rem;
-        }
-
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem; margin-top: 1rem;
-        }
-
-        .skill-card {
-            background: var(--bg-body); border: 1px solid var(--border-color);
-            padding: 1.2rem; border-radius: 12px; display: flex; flex-direction: column; gap: 10px;
-        }
-
-        .btn-direct-buy {
-            background: var(--primary); color: white; border: none;
-            padding: 8px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; flex: 1;
-        }
-
-        .side-drawer {
-            position: fixed; right: -400px; top: 0; width: 380px; height: 100%;
-            background: var(--bg-card); box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            z-index: 2000; transition: 0.4s ease; display: flex; flex-direction: column;
-        }
-
-        .side-drawer.visible { right: 0; }
-
-        .drawer-header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-
-        .drawer-content { padding: 1.5rem; overflow-y: auto; flex: 1; }
-
-        .progress-bar { background: var(--border-color); height: 10px; border-radius: 5px; margin: 8px 0 15px 0; overflow: hidden; }
-
-        .progress-fill { background: var(--primary); height: 100%; transition: width 0.5s ease; }
-
-        .balance-gold { font-size: 2.5rem; font-weight: 800; color: var(--gold); }
-
-        .hidden { display: none; }
-
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 3000;
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
-            padding: 2rem; border-radius: 24px; text-align: center; max-width: 400px;
-        }
-
-        .checkout-btn {
-            width: 100%; padding: 15px; background: var(--primary);
-            color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer;
-        }
-
-        .cart-card {
-            background: var(--bg-body); padding: 10px; border-radius: 8px;
-            margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .worker-man { font-size: 2rem; text-align: center; animation: bounce 0.5s infinite alternate; }
-        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+        /* MODALS */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 5000; }
+        .modal-content { background: var(--surface); padding: 30px; border-radius: 24px; text-align: center; max-width: 400px; width: 90%; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 15px; }
+        
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <div class="header-left"><div class="logo">Skill-Shop</div></div>
+        <div class="logo">Skill-Shop</div>
         <div class="header-right">
             <button id="help-btn" class="icon-btn">❓</button>
             <button id="inventory-icon" class="icon-btn">🎒 <span class="badge" id="acquired-count">0</span></button>
-            <button id="cart-icon" class="icon-btn">🛒 <span class="badge badge-cart" id="cart-count">0</span></button>
+            <button id="cart-icon" class="icon-btn">🛒 <span class="badge" id="cart-count">0</span></button>
             <button id="mode-toggle-btn" class="icon-btn">🌙</button>
         </div>
     </header>
 
     <aside id="help-panel" class="side-drawer">
-        <div class="drawer-header"><h2>📖 Mode d'emploi</h2><button class="close-drawer-x">×</button></div>
+        <div class="drawer-header"><h2>📖 Guide</h2><button class="close-drawer-x">×</button></div>
         <div class="drawer-content">
-            <p>1. 🛠️ Gagnez 20C/h avec l'atelier.</p>
-            <p>2. 💰 Revendez à 50% du prix.</p>
-            <button id="close-guide-action" class="checkout-btn" style="margin-top:20px">D'ACCORD</button>
+            <div class="guide-item-modern">Gagnez 20C par heure de travail simulée.</div>
+            <div class="guide-item-modern">Revendez vos acquis à 50% du prix d'achat.</div>
+            <button id="close-guide-action" class="checkout-btn">COMPRIS</button>
         </div>
     </aside>
 
     <aside id="inventory-panel" class="side-drawer">
         <div class="drawer-header"><h2>🎒 Mon Savoir</h2><button class="close-drawer-x">×</button></div>
-        <div class="drawer-content"><div id="acquired-skills-list"></div></div>
+        <div class="drawer-content" id="acquired-skills-list"></div>
     </aside>
 
     <aside id="cart-panel" class="side-drawer">
         <div class="drawer-header"><h2>🛒 Panier</h2><button class="close-drawer-x">×</button></div>
-        <div class="drawer-content">
-            <div id="cart-list"></div>
-            <div class="summary" style="margin-top:20px; border-top:1px solid var(--border-color); padding-top:10px">
-                <p>Total: <span id="cart-total">0</span> C</p>
+        <div class="cart-container">
+            <div id="cart-list" class="cart-items-list"></div>
+            <div class="cart-summary">
+                <div class="summary-line"><span>Total</span><span id="cart-total">0</span> C</div>
                 <button id="validate-purchase-btn" class="checkout-btn">VALIDER L'ACHAT</button>
             </div>
         </div>
     </aside>
 
     <div id="custom-alert" class="modal-overlay">
-        <div class="modal-content glass-effect">
-            <h3>⚠️ Solde Insuffisant</h3>
+        <div class="modal-content">
+            <div class="alert-icon">⚠️</div>
+            <h3>Solde Insuffisant</h3>
+            <p>Travaillez à l'atelier pour gagner plus de crédits !</p>
             <button id="close-alert-btn" class="checkout-btn">RETOUR</button>
         </div>
     </div>
 
     <div id="stage-celebration" class="modal-overlay">
-        <div class="celebration-box glass-effect">
+        <div class="modal-content">
             <h2>🌸 STAGE COMPLÉTÉ !</h2>
+            <p>Félicitations, vous maîtrisez un nouveau palier.</p>
             <button onclick="document.getElementById('stage-celebration').style.display='none'" class="checkout-btn">CONTINUER</button>
         </div>
     </div>
 
     <main class="main-content">
-        <section class="main-border">
-            <h2>Catalogue des Compétences</h2>
-            <div id="skills-list" class="skills-grid"></div>
+        <section class="skills-catalog">
+            <div class="main-border">
+                <h2>Catalogue des Compétences</h2>
+                <div id="skills-list" class="skills-grid"></div>
+            </div>
         </section>
         
-        <aside>
+        <aside class="sidebar-right">
             <div class="main-border">
                 <small>SOLDE ACTUEL</small>
                 <div class="balance-gold"><span id="credit-balance">1000</span> <small>C</small></div>
             </div>
+            
             <div class="main-border">
                 <h3>📊 Progression</h3>
                 <div id="acquisition-diagram-container"></div>
             </div>
+
             <div class="main-border">
                 <h3>🛠️ Atelier</h3>
                 <form id="production-form">
-                    <input type="number" id="time-allocated" value="1" min="1" style="width:50px">
-                    <button type="submit" id="btn-produce" class="btn-direct-buy">PRODUIRE</button>
+                    <input type="number" id="time-allocated" value="1" min="1" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border);">
+                    <button type="submit" id="btn-produce" class="checkout-btn" style="margin:0">PRODUIRE DES CRÉDITS</button>
                 </form>
                 <div id="worker-zone" class="hidden">
-                    <div class="worker-man">🔨</div>
+                    <div class="worker-man">👨‍🔧<span class="hammer">🔨</span></div>
                 </div>
             </div>
         </aside>
@@ -224,25 +188,35 @@
             const save = () => localStorage.setItem('skillShop_final_V2', JSON.stringify(state));
 
             const updateUI = () => {
+                // Thème
+                document.documentElement.setAttribute('data-theme', state.theme);
+                document.getElementById('mode-toggle-btn').innerText = state.theme === 'dark' ? '☀️' : '🌙';
+
+                // Balances
                 document.getElementById('credit-balance').innerText = Math.floor(state.credits);
                 document.getElementById('cart-count').innerText = state.cart.length;
                 document.getElementById('acquired-count').innerText = state.acquired.length;
 
+                // Catalogue
                 const list = document.getElementById('skills-list');
                 list.innerHTML = '';
                 CATALOGUE.filter(s => !state.acquired.includes(s.name)).forEach(skill => {
                     const card = document.createElement('div');
                     card.className = 'skill-card';
                     card.innerHTML = `
-                        <div style="flex:1"><strong>${skill.name}</strong><br><small>${skill.desc}</small><br>
-                        <span style="color:var(--primary); font-weight:800">${skill.price} C</span></div>
+                        <div>
+                            <strong>${skill.name}</strong><br>
+                            <small style="color:var(--text-muted)">${skill.desc}</small><br>
+                            <span class="skill-price">${skill.price} C</span>
+                        </div>
                         <div class="action-buttons">
-                            <button class="btn-direct-buy" onclick="addToCart(${skill.id})">🛒</button>
+                            <button class="btn-add-cart" onclick="addToCart(${skill.id})">🛒</button>
                             <button class="btn-direct-buy" onclick="buyDirect(${skill.id})">ACHETER</button>
                         </div>`;
                     list.appendChild(card);
                 });
 
+                // Progression
                 document.getElementById('acquisition-diagram-container').innerHTML = STAGES.map(stage => {
                     const has = stage.requiredSkills.filter(s => state.acquired.includes(s)).length;
                     const pc = (has / stage.requiredSkills.length) * 100;
@@ -250,29 +224,41 @@
                         state.completedStages.push(stage.id);
                         document.getElementById('stage-celebration').style.display = 'flex';
                     }
-                    return `<div><small>${stage.name}</small><div class="progress-bar"><div class="progress-fill" style="width:${pc}%"></div></div></div>`;
+                    return `<div style="margin-bottom:15px">
+                        <small>${stage.name} (${has}/${stage.requiredSkills.length})</small>
+                        <div class="progress-bar"><div class="progress-fill" style="width:${pc}%"></div></div>
+                    </div>`;
                 }).join('');
 
+                // Panier
                 const currentTotal = state.cart.reduce((s,i) => s + i.price, 0);
                 document.getElementById('cart-list').innerHTML = state.cart.map((item, idx) => `
                     <div class="cart-card">
-                        <div><strong>${item.name}</strong> - ${item.price} C</div>
-                        <button onclick="removeFromCart(${idx})" style="color:red; border:none; background:none; cursor:pointer">✖</button>
+                        <div><b>${item.name}</b><br><small>${item.price} C</small></div>
+                        <button class="btn-remove" onclick="removeFromCart(${idx})">✖</button>
                     </div>`).join('');
                 document.getElementById('cart-total').innerText = currentTotal;
 
+                // Inventaire
                 document.getElementById('acquired-skills-list').innerHTML = state.acquired.map(name => {
                     const s = CATALOGUE.find(sk => sk.name === name);
                     const ref = s ? Math.floor(s.price/2) : 0;
-                    return `<div class="cart-card">✅ ${name} <button onclick="sellItem('${name}', ${ref})" style="font-size:0.7rem">Vendre (${ref}C)</button></div>`;
+                    return `<div class="cart-card">
+                        <span>✅ ${name}</span>
+                        <button onclick="sellItem('${name}', ${ref})" style="background:none; border:none; color:red; cursor:pointer; font-size:0.8rem">Vendre (${ref}C)</button>
+                    </div>`;
                 }).join('');
+
                 save();
             };
 
+            // Fonctions globales
             window.addToCart = (id) => {
                 const item = CATALOGUE.find(s => s.id === id);
-                if(!state.cart.find(c => c.id === id)) state.cart.push(item);
-                updateUI();
+                if(!state.cart.find(c => c.id === id)) {
+                    state.cart.push(item);
+                    updateUI();
+                }
             };
 
             window.buyDirect = (id) => {
@@ -281,49 +267,70 @@
                     state.credits -= s.price;
                     state.acquired.push(s.name);
                     updateUI();
-                } else document.getElementById('custom-alert').style.display = 'flex';
-            };
-
-            window.sellItem = (n, p) => { if(confirm(`Revendre ${n} ?`)) { state.credits += p; state.acquired = state.acquired.filter(s => s !== n); updateUI(); } };
-            window.removeFromCart = (i) => { state.cart.splice(i,1); updateUI(); };
-
-            document.getElementById('validate-purchase-btn').onclick = () => {
-                const total = state.cart.reduce((s,i) => s + i.price, 0);
-                if (state.credits >= total && state.cart.length > 0) {
-                    state.credits -= total;
-                    state.cart.forEach(item => state.acquired.push(item.name));
-                    state.cart = [];
-                    updateUI();
                 } else {
                     document.getElementById('custom-alert').style.display = 'flex';
                 }
             };
 
-            document.getElementById('production-form').onsubmit = (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('btn-produce');
-                const work = document.getElementById('worker-zone');
-                btn.disabled = true; work.classList.remove('hidden');
-                setTimeout(() => {
-                    state.credits += parseInt(document.getElementById('time-allocated').value) * 20;
-                    btn.disabled = false; work.classList.add('hidden');
+            window.removeFromCart = (i) => { state.cart.splice(i,1); updateUI(); };
+            
+            window.sellItem = (name, price) => {
+                if(confirm(`Vendre "${name}" pour ${price}C ?`)) {
+                    state.credits += price;
+                    state.acquired = state.acquired.filter(s => s !== name);
                     updateUI();
-                }, 2000);
+                }
             };
 
-            const pan = (id, s) => document.getElementById(id).classList.toggle('visible', s);
-            document.getElementById('help-btn').onclick = () => pan('help-panel', true);
-            document.getElementById('inventory-icon').onclick = () => pan('inventory-panel', true);
-            document.getElementById('cart-icon').onclick = () => pan('cart-panel', true);
-            document.querySelectorAll('.close-drawer-x, #close-guide-action').forEach(b => b.onclick = () => 
-                document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible'))
-            );
+            // Event Listeners UI
+            const togglePanel = (id, visible) => document.getElementById(id).classList.toggle('visible', visible);
+            
+            document.getElementById('help-btn').onclick = () => togglePanel('help-panel', true);
+            document.getElementById('inventory-icon').onclick = () => togglePanel('inventory-panel', true);
+            document.getElementById('cart-icon').onclick = () => togglePanel('cart-panel', true);
+            
+            document.querySelectorAll('.close-drawer-x, #close-guide-action').forEach(btn => {
+                btn.onclick = () => document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible'));
+            });
+
             document.getElementById('close-alert-btn').onclick = () => document.getElementById('custom-alert').style.display = 'none';
 
             document.getElementById('mode-toggle-btn').onclick = () => {
                 state.theme = state.theme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', state.theme);
                 updateUI();
+            };
+
+            // Production
+            document.getElementById('production-form').onsubmit = (e) => {
+                e.preventDefault();
+                const hours = parseInt(document.getElementById('time-allocated').value);
+                const btn = document.getElementById('btn-produce');
+                const workZone = document.getElementById('worker-zone');
+                
+                btn.disabled = true;
+                workZone.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    state.credits += hours * 20;
+                    btn.disabled = false;
+                    workZone.classList.add('hidden');
+                    updateUI();
+                }, 2000); // 2 secondes de travail
+            };
+
+            document.getElementById('validate-purchase-btn').onclick = () => {
+                const total = state.cart.reduce((s,i) => s + i.price, 0);
+                if(state.cart.length === 0) return;
+                
+                if(state.credits >= total) {
+                    state.credits -= total;
+                    state.cart.forEach(item => state.acquired.push(item.name));
+                    state.cart = [];
+                    updateUI();
+                    togglePanel('cart-panel', false);
+                } else {
+                    document.getElementById('custom-alert').style.display = 'flex';
+                }
             };
 
             updateUI();
