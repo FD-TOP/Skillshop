@@ -3,83 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill-Shop | Expert Dashboard</title>
+    <title>Skill-Shop | Expert Curriculum</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette Tech Modern */
-            --bg-body: #05070a;
-            --bg-card: rgba(17, 25, 40, 0.75);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-body: #0a0b10;
+            --bg-card: rgba(20, 22, 30, 0.8);
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
             --primary: #00d2ff;
-            --secondary: #9333ea; /* Violet pour Backend */
-            --accent: #f59e0b; /* Or pour certifications */
+            --primary-glow: rgba(0, 210, 255, 0.3);
             --success: #10b981;
             --danger: #f43f5e;
         }
 
         [data-theme="light"] {
-            --bg-body: #f8fafc;
+            --bg-body: #f1f5f9;
             --bg-card: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --text-white: #1e293b;
+            --text-gray: #64748b;
             --border: #e2e8f0;
-            --primary: #0ea5e9;
+            --primary: #0284c7;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; transition: 0.3s ease; }
-        body { background-color: var(--bg-body); color: var(--text-main); padding-top: 85px; min-height: 100vh; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-white); padding-top: 90px; transition: 0.3s; }
 
         /* HEADER */
         .main-header { 
             position: fixed; top: 0; width: 100%; height: 70px; 
-            background: var(--bg-card); backdrop-filter: blur(12px);
+            background: var(--bg-card); backdrop-filter: blur(20px);
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 40px; z-index: 1000; border-bottom: 1px solid var(--border);
         }
-        .logo { font-weight: 800; font-size: 1.2rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
 
         /* LAYOUT */
-        .main-content { display: flex; max-width: 1500px; margin: 0 auto; padding: 20px; gap: 30px; }
+        .main-content { display: flex; max-width: 1400px; margin: 0 auto; padding: 20px; gap: 30px; }
         .skills-catalog { flex: 3; }
         .sidebar-right { flex: 1.2; display: flex; flex-direction: column; gap: 20px; }
 
-        /* SECTION TITLES */
-        .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .level-tag { font-size: 0.65rem; background: var(--primary); color: #000; padding: 2px 8px; border-radius: 4px; font-weight: 800; }
+        .main-border { background: var(--bg-card); border-radius: 12px; padding: 25px; border: 1px solid var(--border); }
 
-        /* SKILLS GRID */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .skill-card { 
-            background: var(--bg-card); border: 1px solid var(--border); 
-            padding: 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 12px;
-            position: relative; overflow: hidden;
+        /* SKILLS DISPLAY */
+        .level-section { margin-bottom: 40px; }
+        .level-title { 
+            font-size: 0.9rem; font-weight: 800; color: var(--primary); 
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
         }
-        .skill-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px -10px var(--primary-glow); }
-        .skill-card h4 { font-size: 1.1rem; color: var(--text-main); }
-        .skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; flex-grow: 1; }
-        .skill-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .level-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
-        /* UI ELEMENTS */
-        .main-border { background: var(--bg-card); border-radius: 16px; padding: 25px; border: 1px solid var(--border); }
-        .icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); width: 42px; height: 42px; border-radius: 10px; cursor: pointer; position: relative; }
-        .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
+        .skill-card { 
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); 
+            padding: 20px; border-radius: 8px; display: flex; flex-direction: column; gap: 15px;
+            transition: 0.3s; position: relative;
+        }
+        .skill-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .skill-card.owned { opacity: 0.5; border-color: var(--success); cursor: default; }
+        .skill-card.owned::before { content: "ACQUIS ✓"; position: absolute; top: 10px; right: 10px; font-size: 0.6rem; font-weight: 800; color: var(--success); }
 
-        .progress-bar { background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; margin: 8px 0; overflow: hidden; }
-        .progress-fill { background: var(--primary); height: 100%; transition: width 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .skill-price { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
 
-        .checkout-btn { width: 100%; padding: 12px; background: var(--primary); color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; }
+        /* PROGRESS BARS */
+        .progression-item { margin-bottom: 20px; }
+        .prog-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 8px; }
+        .progress-bar { background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; }
+        .progress-fill { background: var(--primary); height: 100%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
+
+        /* BUTTONS & UI */
+        .icon-btn { background: transparent; border: 1px solid var(--border); color: var(--text-white); width: 42px; height: 42px; border-radius: 4px; cursor: pointer; position: relative; }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--primary); color: #000; font-size: 0.7rem; font-weight: 900; width: 18px; height: 18px; border-radius: 2px; display: flex; align-items: center; justify-content: center; }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--primary); color: #000; border: none; border-radius: 4px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
         .checkout-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        /* DRAWERS */
-        .side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 450px; background: #08090d; transform: translateX(100%); transition: 0.4s ease; z-index: 2000; border-left: 1px solid var(--border); padding: 30px; }
+        .side-drawer { position: fixed; top: 0; right: 0; height: 100vh; width: 400px; background: #0f1117; transform: translateX(100%); transition: 0.4s; z-index: 2000; border-left: 1px solid var(--border); padding: 30px; }
         .side-drawer.visible { transform: translateX(0); }
         
         .hidden { display: none !important; }
-        .level-separator { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 10px; color: var(--primary); font-size: 0.9rem; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-        .level-separator::after { content: ""; flex-grow: 1; height: 1px; background: var(--border); }
     </style>
 </head>
 <body>
@@ -87,9 +91,9 @@
     <header class="main-header">
         <div class="header-left">
             <div class="logo">Skill-Shop</div>
-            <button id="nav-help-trigger" style="margin-left:20px; cursor:pointer; background:none; border:1px solid var(--primary); color:var(--primary); padding:6px 15px; border-radius:20px; font-size: 0.75rem; font-weight: 700;">📖 INSTRUCTIONS</button>
+            <button id="nav-help-trigger" style="margin-left:20px; cursor:pointer; background:none; border:1px solid var(--primary); color:var(--primary); padding:5px 15px; border-radius:4px; font-size:0.7rem; font-weight:700;">📖 INSTRUCTIONS</button>
         </div>
-        <div class="header-right" style="display:flex; gap:12px;">
+        <div class="header-right" style="display:flex; gap:10px;">
             <button id="inventory-icon" class="icon-btn">🎒 <span class="badge" id="acquired-count">0</span></button>
             <button id="cart-icon" class="icon-btn">🛒 <span class="badge" id="cart-count">0</span></button>
             <button id="mode-toggle-btn" class="icon-btn">🌙</button>
@@ -99,54 +103,42 @@
     <main class="main-content">
         <section class="skills-catalog">
             <div class="main-border">
-                <div class="section-header">
-                    <h2>Arbre de Compétences</h2>
-                </div>
-                <div id="skills-list" class="skills-grid"></div>
+                <div id="catalog-content"></div>
             </div>
         </section>
         
         <aside class="sidebar-right">
             <div class="main-border">
-                <small style="color: var(--text-muted)">SOLDE ACTUEL</small>
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><span id="credit-balance">1000</span> <span style="font-size: 1rem;">C</span></div>
+                <small style="color: var(--text-gray);">SOLDE ACTUEL</small>
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><span id="credit-balance">1000</span> C</div>
+            </div>
+            
+            <div class="main-border">
+                <h3 style="font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 20px;">MAÎTRISE PAR NIVEAU</h3>
+                <div id="progression-list"></div>
             </div>
 
             <div class="main-border">
-                <h3>📊 Progression</h3>
-                <div id="progression-container"></div>
-            </div>
-
-            <div class="main-border">
-                <h3>🛠️ Atelier</h3>
-                <p style="font-size: 0.8rem; margin: 10px 0; color: var(--text-muted);">Générez des crédits pour financer vos études.</p>
-                <button id="btn-produce-action" class="checkout-btn">LANCER LA PRODUCTION</button>
-                <div id="worker-status" class="hidden" style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--success);">
-                    ⚡ <b>Compilation en cours...</b>
-                </div>
+                <h3>🛠️ ATELIER</h3>
+                <button id="btn-produce-action" class="checkout-btn">TRAVAILLER (+20C)</button>
+                <div id="worker-status" class="hidden" style="text-align: center; margin-top: 15px;">👨‍🔧 Production en cours...</div>
             </div>
         </aside>
     </main>
 
     <aside id="help-panel" class="side-drawer">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-            <h2>📖 Guide Expert</h2>
-            <button class="close-btn" style="background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">×</button>
+        <h2>📖 Guide de Carrière</h2>
+        <div style="margin-top:20px; color:var(--text-gray); font-size:0.9rem; line-height:1.6;">
+            <p>1. <b>Atelier :</b> Générez des crédits (2s d'attente).</p>
+            <p>2. <b>Achat :</b> Glissez ou cliquez pour acheter des compétences.</p>
+            <p>3. <b>Niveaux :</b> Complétez les 3 paliers pour devenir expert.</p>
+            <p>4. <b>Revente :</b> Vendez à 50% via l'inventaire 🎒.</p>
         </div>
-        <div style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted);">
-            <p>Bienvenue dans votre simulateur de carrière. Voici les règles :</p>
-            <ul style="margin-top:20px; display:flex; flex-direction:column; gap:15px; list-style:none;">
-                <li>🚀 <b>Niveaux :</b> Débloquez les 3 niveaux (Fondations, Frontend, Backend).</li>
-                <li>🛠️ <b>Production :</b> Chaque session à l'atelier vous rapporte 20C (délai de 2s).</li>
-                <li>🔄 <b>Revente :</b> Vous pouvez revendre un acquis à 50% de sa valeur via l'inventaire 🎒.</li>
-                <li>💾 <b>Persistance :</b> Vos données sont sauvées localement.</li>
-            </ul>
-            <button class="checkout-btn close-btn" style="margin-top:30px;">FERMER LE MANUEL</button>
-        </div>
+        <button class="checkout-btn close-btn" style="margin-top:30px;">FERMER</button>
     </aside>
 
     <aside id="inventory-panel" class="side-drawer">
-        <h2>🎒 Mon Inventaire</h2>
+        <h2>🎒 Mon Savoir</h2>
         <div id="acquired-skills-list" style="margin-top:20px;"></div>
         <button class="checkout-btn close-btn" style="margin-top:30px;">RETOUR</button>
     </aside>
@@ -155,116 +147,112 @@
         <h2>🛒 Panier</h2>
         <div id="cart-list" style="margin-top:20px;"></div>
         <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-                <span>Total :</span>
-                <span style="font-weight:800; color:var(--primary);"><span id="cart-total">0</span> C</span>
-            </div>
-            <button id="validate-purchase-btn" class="checkout-btn">PAYER L'ACHAT</button>
+            <h3>Total : <span id="cart-total">0</span> C</h3>
+            <button id="validate-purchase-btn" class="checkout-btn" style="margin-top:15px;">PAYER</button>
         </div>
     </aside>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const CATALOGUE = [
-                // LEVEL 1: FONDATIONS
-                { id: 1, name: "HTML5", price: 100, level: 1, desc: "Structure sémantique et accessibilité." },
-                { id: 2, name: "CSS3", price: 150, level: 1, desc: "Mise en forme moderne et Flexbox." },
-                { id: 3, name: "JS Base", price: 200, level: 1, desc: "Logique, variables et manipulation DOM." },
-                { id: 4, name: "Git", price: 250, level: 1, desc: "Gestion de version et travail collaboratif." },
+                { id: 1, name: "HTML5", price: 100, level: 1, desc: "Structure sémantique." },
+                { id: 2, name: "CSS3", price: 150, level: 1, desc: "Design & Flexbox." },
+                { id: 3, name: "JS Base", price: 200, level: 1, desc: "Logique & DOM." },
+                { id: 4, name: "Git", price: 250, level: 1, desc: "Gestion de version." },
                 
-                // LEVEL 2: FRONTEND
-                { id: 5, name: "SASS", price: 300, level: 2, desc: "Préprocesseur CSS pour styles complexes." },
-                { id: 6, name: "API Fetch", price: 400, level: 2, desc: "Consommation de données asynchrones." },
-                { id: 7, name: "React", price: 600, level: 2, desc: "Composants, Hooks et State Management." },
-                { id: 8, name: "TypeScript", price: 500, level: 2, desc: "Typage statique pour JavaScript robuste." },
+                { id: 5, name: "SASS", price: 300, level: 2, desc: "Styles avancés." },
+                { id: 6, name: "API Fetch", price: 400, level: 2, desc: "Données distantes." },
+                { id: 7, name: "React", price: 600, level: 2, desc: "UI Components." },
+                { id: 8, name: "TypeScript", price: 500, level: 2, desc: "Typage statique." },
 
-                // LEVEL 3: BACKEND
-                { id: 9, name: "Node.js", price: 700, level: 3, desc: "Environnement d'exécution JavaScript côté serveur." },
-                { id: 10, name: "Express", price: 600, level: 3, desc: "Framework backend minimaliste et rapide." },
-                { id: 11, name: "MongoDB", price: 550, level: 3, desc: "Base de données NoSQL flexible." },
-                { id: 12, name: "Docker", price: 800, level: 3, desc: "Conteneurisation et déploiement moderne." }
+                { id: 9, name: "Node.js", price: 700, level: 3, desc: "Serveur JS." },
+                { id: 10, name: "Express", price: 600, level: 3, desc: "Framework API." },
+                { id: 11, name: "MongoDB", price: 550, level: 3, desc: "Base NoSQL." },
+                { id: 12, name: "Docker", price: 800, level: 3, desc: "Conteneurs." }
             ];
 
-            const STAGES = [
-                { id: 1, name: "Fondations", levels: [1] },
-                { id: 2, name: "Frontend Pro", levels: [2] },
-                { id: 3, name: "Fullstack Expert", levels: [3] }
+            const LEVELS = [
+                { id: 1, name: "Fondations (LVL 1)" },
+                { id: 2, name: "Frontend Pro (LVL 2)" },
+                { id: 3, name: "Backend Master (LVL 3)" }
             ];
 
-            let state = JSON.parse(localStorage.getItem('skillShop_final_V3')) || {
+            let state = JSON.parse(localStorage.getItem('skillShop_v4')) || {
                 credits: 1000, cart: [], acquired: [], theme: 'dark'
             };
 
-            const save = () => localStorage.setItem('skillShop_final_V3', JSON.stringify(state));
-
             const updateUI = () => {
                 document.documentElement.setAttribute('data-theme', state.theme);
+                document.getElementById('mode-toggle-btn').innerText = state.theme === 'dark' ? '☀️' : '🌙';
                 document.getElementById('credit-balance').innerText = state.credits;
                 document.getElementById('cart-count').innerText = state.cart.length;
                 document.getElementById('acquired-count').innerText = state.acquired.length;
 
-                // Skills Catalog by Level
-                const list = document.getElementById('skills-list');
-                list.innerHTML = '';
-                
-                [1, 2, 3].forEach(lv => {
-                    const label = lv === 1 ? "Fondations" : lv === 2 ? "Frontend" : "Backend";
-                    const separator = document.createElement('div');
-                    separator.className = 'level-separator';
-                    separator.innerHTML = `<span>LVL ${lv}: ${label}</span>`;
-                    list.appendChild(separator);
+                // Affichage du Catalogue Complet
+                const catalog = document.getElementById('catalog-content');
+                catalog.innerHTML = '';
 
-                    CATALOGUE.filter(s => s.level === lv && !state.acquired.includes(s.name)).forEach(skill => {
+                LEVELS.forEach(lvl => {
+                    const section = document.createElement('div');
+                    section.className = 'level-section';
+                    section.innerHTML = `<div class="level-title">${lvl.name}</div>`;
+                    
+                    const grid = document.createElement('div');
+                    grid.className = 'skills-grid';
+                    
+                    CATALOGUE.filter(s => s.level === lvl.id).forEach(skill => {
+                        const isOwned = state.acquired.includes(skill.name);
                         const card = document.createElement('div');
-                        card.className = 'skill-card';
-                        card.draggable = true;
+                        card.className = `skill-card ${isOwned ? 'owned' : ''}`;
+                        card.draggable = !isOwned;
                         card.innerHTML = `
-                            <h4>${skill.name}</h4>
-                            <p>${skill.desc}</p>
-                            <div class="skill-footer">
+                            <strong>${skill.name}</strong>
+                            <small style="color:var(--text-gray)">${skill.desc}</small>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px">
                                 <span class="skill-price">${skill.price} C</span>
-                                <button onclick="addToCart(${skill.id})" style="background:var(--primary); border:none; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:800; color:#000;">🛒</button>
+                                ${!isOwned ? `<button onclick="addToCart(${skill.id})" style="cursor:pointer; padding:5px 10px; background:var(--primary); border:none; border-radius:4px; font-weight:800; color:#000">🛒</button>` : ''}
                             </div>`;
-                        card.ondragstart = (e) => e.dataTransfer.setData('text', skill.id);
-                        list.appendChild(card);
+                        if(!isOwned) card.ondragstart = (e) => e.dataTransfer.setData('text', skill.id);
+                        grid.appendChild(card);
                     });
+                    section.appendChild(grid);
+                    catalog.appendChild(section);
                 });
 
-                // Progression Bars
-                document.getElementById('progression-container').innerHTML = STAGES.map(stage => {
-                    const skillsInStage = CATALOGUE.filter(s => stage.levels.includes(s.level));
-                    const acquiredInStage = skillsInStage.filter(s => state.acquired.includes(s.name)).length;
-                    const pc = (acquiredInStage / skillsInStage.length) * 100;
+                // Barres de Progression
+                document.getElementById('progression-list').innerHTML = LEVELS.map(lvl => {
+                    const levelSkills = CATALOGUE.filter(s => s.level === lvl.id);
+                    const owned = levelSkills.filter(s => state.acquired.includes(s.name)).length;
+                    const pc = (owned / levelSkills.length) * 100;
                     return `
-                        <div style="margin-bottom:15px">
-                            <small>${stage.name} (${acquiredInStage}/${skillsInStage.length})</small>
+                        <div class="progression-item">
+                            <div class="prog-header"><span>${lvl.name}</span><span>${owned}/${levelSkills.length}</span></div>
                             <div class="progress-bar"><div class="progress-fill" style="width:${pc}%"></div></div>
                         </div>`;
                 }).join('');
 
-                // Inventory with Sell Action
+                // Inventaire (Revente)
                 document.getElementById('acquired-skills-list').innerHTML = state.acquired.map(name => {
                     const s = CATALOGUE.find(sk => sk.name === name);
                     const sellPrice = Math.floor(s.price / 2);
-                    return `
-                        <div style="background:rgba(255,255,255,0.02); padding:15px; border-radius:10px; border:1px solid var(--border); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-                            <span>✅ ${name}</span>
-                            <button onclick="sellSkill('${name}', ${sellPrice})" style="color:var(--danger); background:none; border:1px solid var(--danger); padding:4px 8px; border-radius:4px; cursor:pointer; font-size:0.7rem;">VENDRE (${sellPrice}C)</button>
-                        </div>`;
+                    return `<div style="display:flex; justify-content:space-between; margin-bottom:10px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;">
+                        <span>✅ ${name}</span>
+                        <button onclick="sellSkill('${name}', ${sellPrice})" style="color:var(--danger); background:none; border:1px solid var(--danger); padding:2px 5px; border-radius:4px; font-size:0.7rem; cursor:pointer">VENDRE (${sellPrice}C)</button>
+                    </div>`;
                 }).join('');
 
-                // Cart List
-                document.getElementById('cart-list').innerHTML = state.cart.map((item, idx) => `
-                    <div style="display:flex; justify-content:space-between; padding:10px; background:rgba(255,255,255,0.03); border-radius:8px; margin-bottom:8px;">
-                        <span>${item.name}</span>
-                        <button onclick="removeFromCart(${idx})" style="color:var(--danger); border:none; background:none; cursor:pointer;">✖</button>
+                // Panier
+                document.getElementById('cart-list').innerHTML = state.cart.map((item, i) => `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <span>${item.name} (${item.price}C)</span>
+                        <button onclick="removeFromCart(${i})" style="color:var(--danger); border:none; background:none; cursor:pointer">✖</button>
                     </div>`).join('');
                 document.getElementById('cart-total').innerText = state.cart.reduce((sum, item) => sum + item.price, 0);
 
-                save();
+                localStorage.setItem('skillShop_v4', JSON.stringify(state));
             };
 
-            // PRODUCTION LOGIC
+            // LOGIQUE
             document.getElementById('btn-produce-action').onclick = () => {
                 const btn = document.getElementById('btn-produce-action');
                 btn.disabled = true;
@@ -277,22 +265,13 @@
                 }, 2000);
             };
 
-            // THEME LOGIC
-            document.getElementById('mode-toggle-btn').onclick = () => {
-                state.theme = state.theme === 'dark' ? 'light' : 'dark';
-                updateUI();
-            };
-
-            // CART ACTIONS
             window.addToCart = (id) => {
                 const item = CATALOGUE.find(s => s.id === id);
-                if(item && !state.cart.some(c => c.id === id)) {
+                if(item && !state.cart.some(c => c.id === id) && !state.acquired.includes(item.name)) {
                     state.cart.push(item);
                     updateUI();
                 }
             };
-
-            window.removeFromCart = (i) => { state.cart.splice(i, 1); updateUI(); };
 
             window.sellSkill = (name, price) => {
                 if(confirm(`Revendre ${name} pour ${price}C ?`)) {
@@ -302,6 +281,8 @@
                 }
             };
 
+            window.removeFromCart = (i) => { state.cart.splice(i, 1); updateUI(); };
+
             document.getElementById('validate-purchase-btn').onclick = () => {
                 const total = state.cart.reduce((sum, item) => sum + item.price, 0);
                 if(state.credits >= total && state.cart.length > 0) {
@@ -309,28 +290,25 @@
                     state.cart.forEach(i => state.acquired.push(i.name));
                     state.cart = [];
                     updateUI();
-                    document.getElementById('cart-panel').classList.remove('visible');
-                } else {
-                    alert("Solde insuffisant !");
-                }
+                } else if(state.cart.length > 0) alert("Solde insuffisant !");
             };
 
-            // DRAG & DROP
-            const cIcon = document.getElementById('cart-icon');
-            cIcon.ondragover = (e) => { e.preventDefault(); cIcon.style.transform = "scale(1.2)"; };
-            cIcon.ondragleave = () => { cIcon.style.transform = "scale(1)"; };
-            cIcon.ondrop = (e) => {
-                cIcon.style.transform = "scale(1)";
-                const id = parseInt(e.dataTransfer.getData('text'));
-                if(id) addToCart(id);
-            };
-
-            // UI HELPERS
+            document.getElementById('mode-toggle-btn').onclick = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; updateUI(); };
+            
             const toggle = (id, s) => document.getElementById(id).classList.toggle('visible', s);
             document.getElementById('nav-help-trigger').onclick = () => toggle('help-panel', true);
             document.getElementById('inventory-icon').onclick = () => toggle('inventory-panel', true);
             document.getElementById('cart-icon').onclick = () => toggle('cart-panel', true);
             document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => document.querySelectorAll('.side-drawer').forEach(d => d.classList.remove('visible')));
+
+            // Drag & Drop
+            const cIcon = document.getElementById('cart-icon');
+            cIcon.ondragover = (e) => { e.preventDefault(); cIcon.style.borderColor = "var(--primary)"; };
+            cIcon.ondrop = (e) => {
+                cIcon.style.borderColor = "var(--border)";
+                const id = parseInt(e.dataTransfer.getData('text'));
+                if(id) addToCart(id);
+            };
 
             updateUI();
         });
